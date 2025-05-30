@@ -1,0 +1,12 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.iframe {
+  height: 800px;
+  width: 800px;
+}
+
+/*# sourceMappingURL=styles.css.map */
