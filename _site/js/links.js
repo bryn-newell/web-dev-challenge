@@ -1,4 +1,4 @@
-import { testOpen } from './testOpen.js';
+import { openAndCloseTab } from './openAndCloseTab.js';
 
 const form = document.querySelector('#form');
 const list = document.querySelector('#display-list');
@@ -8,18 +8,22 @@ const arrOfLinks = [];
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(form);
-  const inputLinks = data.get('links');
-  console.log(inputLinks);
+  //to do - allow for an array of links
+  const formDataLinks = data.get('links');
 
-  const listElement = (str) => `<li>${str}</li>`;
-  arrOfLinks.push(inputLinks);
+  console.log(formDataLinks);
+  // const filteredFormLinks = new RegEx();
 
-  list.innerHTML = arrOfLinks.map((link) => listElement(link)).join('');
+  arrOfLinks.push(formDataLinks);
+
+  const listItemElement = (str) => `<li>${str}</li>`;
+
+  list.innerHTML = arrOfLinks.map((link) => listItemElement(link)).join('');
 });
 
 const readButton = document.querySelector('#read-button');
 readButton.addEventListener('click', () => {
   arrOfLinks.forEach((link) => {
-    testOpen(link);
+    openAndCloseTab(link);
   });
 });
