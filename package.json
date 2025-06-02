@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently 'sass --watch styles:_site/css' 'npx @11ty/eleventy --serve'"
+    "start": "concurrently 'sass --watch styles:_site/css' 'npx @11ty/eleventy --serve'",
+    "dev-server": "tsx watch server/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,17 @@
   "dependencies": {
     "@11ty/eleventy": "^3.1.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@hono/node-server": "^1.14.3",
     "concurrently": "^9.1.0",
+    "hono": "^4.7.11",
     "sass": "^1.83.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.29",
+    "eslint": "^9.28.0",
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }
