@@ -80,11 +80,6 @@ input {
   width: 212px;
   margin-block-start: 12px;
   border: 2px solid $reseda-green;
-
-  &:focus-visible {
-    // outline-offset: 1px;
-    // outline-color: $black-olive;
-  }
 }
 
 .button-container {
@@ -97,14 +92,9 @@ input {
   }
 }
 
-img {
-  width: 100%;
-  margin-block-start: 24px;
-  max-height: minmax(300px, 100vh);
-  height: 450px;
+svg {
+  margin-block-start: 48px;
   object-fit: cover;
-  // object-position: top;
-  // mask: linear-gradient(to top, rgb(0, 0, 0) 60%, rgba(0, 0, 0, 0));
 }
 
 .read-section {

@@ -3,6 +3,7 @@ import { openAndCloseTab } from "./openAndCloseTab.js";
 const form = document.querySelector("#form");
 const list = document.querySelector("#display-list");
 const input = document.querySelector("#input");
+const readSection = document.querySelector(".read-section");
 
 let arrOfLinks = [];
 
@@ -19,7 +20,6 @@ form.addEventListener("submit", (e) => {
 
   list.innerHTML = arrOfLinks.map((link) => listItemElement(link)).join("");
 
-  const readSection = document.querySelector(".read-section");
   // there should be an if statement here but oh well
   readSection.style.display = "block";
 });
@@ -59,4 +59,8 @@ clearFormButton.addEventListener("click", (e) => {
   list.innerHTML = "";
   arrOfLinks = [];
   input.value = "";
+  readSection.style.display = "none";
 });
+
+console.log(window.innerWidth);
+console.log(window.innerHeight);

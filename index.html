@@ -30,7 +30,16 @@
     <button id="read-button">read my reading list</button>
   </div>
 
-  <img src="/assets/books.jpg" alt="">
+  <svg class="clip-svg" width="1710" height="879" viewBox="0 0 1710 879">
+    <defs>
+      <filter id="f1" x="0" y="0">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+      </filter>
+    </defs>
+    <image filter="url(#f1)" xlink:href="/assets/books.jpg" src="/assets/books.jpg" alt="Image" height="879"
+      width="1710" class="svg__image">
+
+  </svg>
 
   <script src="/js/links.js" type="module"></script>
 </body>
