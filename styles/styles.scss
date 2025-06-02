@@ -1,10 +1,53 @@
+$black-olive: #1A1B1D;
+$reseda-green: #656D4A;
+$darkest-black: #010101;
+$black-02: #141414;
+$lightest-white: #F6f6f6;
+
+html {
+  font-family: "Oxygen", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  background-color: $lightest-white;
+  color: #141414;
+}
+
 .body {
+  align-items: center;
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-align: center;
 }
 
-.iframe {
-  height: 800px;
-  width: 800px;
+a {}
+
+ol {
+  text-align: left;
+}
+
+button {
+  background-color: $black-olive;
+  color: white;
+  padding-inline: 8px;
+  border-radius: 4px;
+  padding-block: 8px;
+  border-color: $black-olive;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button,
+  input {
+    display: block;
+  }
+}
+
+input {
+  height: 24px;
+  border-radius: 4px;
+  box-shadow: 0;
 }

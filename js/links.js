@@ -8,22 +8,27 @@ const arrOfLinks = [];
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(form);
-  //to do - allow for an array of links
   const formDataLinks = data.get('links');
+  const separatedFormLinks = formDataLinks.split(' ');
 
-  console.log(formDataLinks);
-  // const filteredFormLinks = new RegEx();
+  arrOfLinks.push(...separatedFormLinks);
 
-  arrOfLinks.push(formDataLinks);
-
-  const listItemElement = (str) => `<li>${str}</li>`;
+  const listItemElement = (str) => `<li><a href="${str}">${str}</a></li>`;
 
   list.innerHTML = arrOfLinks.map((link) => listItemElement(link)).join('');
 });
 
 const readButton = document.querySelector('#read-button');
 readButton.addEventListener('click', () => {
-  arrOfLinks.forEach((link) => {
-    openAndCloseTab(link);
+  arrOfLinks.forEach((link, index) => {
+    const position = 100 * index;
+    openAndCloseTab(link, position);
   });
+});
+
+const clearFormButton = document.querySelector('#clear-button');
+clearFormButton.addEventListener('click', () => {
+  form.reset();
+  list.innerHTML = ' ';
+  console.log('is this working');
 });
