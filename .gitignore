@@ -4,3 +4,9 @@ _site
 node_modules
 
 .history
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
