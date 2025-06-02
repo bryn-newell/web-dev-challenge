@@ -2,8 +2,9 @@ import { openAndCloseTab } from './openAndCloseTab.js';
 
 const form = document.querySelector('#form');
 const list = document.querySelector('#display-list');
+const input = document.querySelector('#input');
 
-const arrOfLinks = [];
+let arrOfLinks = [];
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -13,6 +14,7 @@ form.addEventListener('submit', (e) => {
 
   arrOfLinks.push(...separatedFormLinks);
 
+  // if i have time don't allow for a list item to be empty
   const listItemElement = (str) => `<li><a href="${str}">${str}</a></li>`;
 
   list.innerHTML = arrOfLinks.map((link) => listItemElement(link)).join('');
@@ -22,13 +24,30 @@ const readButton = document.querySelector('#read-button');
 readButton.addEventListener('click', () => {
   arrOfLinks.forEach((link, index) => {
     const position = 100 * index;
-    openAndCloseTab(link, position);
+    const left = position;
+    let top = position;
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    if (top > windowHeight) {
+      //  to do - random number instead?
+      const shift = 100 * index;
+      top = position - shift;
+      console.log('new top', top);
+    }
+
+    console.log({ windowHeight }, { windowWidth }, { left }, { top });
+    // to do - instead of x number of screens calculate the window width
+
+    openAndCloseTab(link, left, top);
   });
 });
 
 const clearFormButton = document.querySelector('#clear-button');
-clearFormButton.addEventListener('click', () => {
-  form.reset();
-  list.innerHTML = ' ';
-  console.log('is this working');
+clearFormButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  list.innerHTML = '';
+  arrOfLinks = [];
+  input.value = '';
 });

@@ -1,4 +1,5 @@
-$black-olive: #1A1B1D;
+$eerie-black: #1A1B1D;
+$black-olive: #333d29;
 $reseda-green: #656D4A;
 $darkest-black: #010101;
 $black-02: #141414;
@@ -18,9 +19,16 @@ html {
   flex-direction: column;
   height: 100%;
   text-align: center;
+  margin: 0;
 }
 
-a {}
+a {
+
+  &:visited,
+  &:active {
+    color: $reseda-green;
+  }
+}
 
 ol {
   text-align: left;
@@ -50,4 +58,29 @@ input {
   height: 24px;
   border-radius: 4px;
   box-shadow: 0;
+  width: 212px;
+  margin-block-start: 12px;
+}
+
+.button-container {
+  display: flex;
+  gap: 12px;
+  margin-block-start: 12px;
+
+  button {
+    width: 100px
+  }
+}
+
+img {
+  width: 100%;
+  margin-block-start: 24px;
+
+  // mask-image: -webkit-gradient(linear, left top, right bottom,
+  //     color-stop(0.00, rgba(0, 0, 0, 1)),
+  //     color-stop(0.35, rgba(0, 0, 0, 1)),
+  //     color-stop(0.50, rgba(0, 0, 0, 0)),
+  //     color-stop(0.65, rgba(0, 0, 0, 0)),
+  //     color-stop(1.00, rgba(0, 0, 0, 0)));
+  // mask-image: linear-gradient(black 0%, transparent 100%);
 }
