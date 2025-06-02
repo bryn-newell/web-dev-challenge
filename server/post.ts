@@ -18,10 +18,7 @@ export const post = async (link: string, content: string) => {
   const sentences = getRandomSentences(content);
   console.log("Random sentences:", sentences);
 
-  const text = `
-  "${sentences.join(" ")}"\n
-  ${link}
-  `;
+  const text = `${link} "${sentences.join(" ")}"`;
 
   console.log("Posting content:", text);
 
@@ -29,6 +26,21 @@ export const post = async (link: string, content: string) => {
 
   await agent.post({
     text,
+    facets: [
+      {
+        $type: "app.bsky.richtext.facet",
+        index: {
+          byteStart: 0,
+          byteEnd: link.length,
+        },
+        features: [
+          {
+            $type: "app.bsky.richtext.facet#link",
+            uri: link,
+          },
+        ],
+      },
+    ],
   });
 };
 
