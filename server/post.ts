@@ -44,10 +44,23 @@ const getRandomSentences = (text: string) => {
 
   const randomIndex = Math.floor(Math.random() * sentences.length);
 
-  const randomNumber = Math.floor(Math.random() * 2) + 1; // Random number between 1 and 3
+  const randomNumber = Math.floor(Math.random() * 3) + 1; // Random number between 1 and 3
   const selectedSentences = sentences.slice(
     randomIndex,
     randomIndex + randomNumber,
   );
-  return selectedSentences.map((sentence) => sentence.trim());
+
+  let totalLength = 0;
+
+  const maxLength = 250;
+
+  const finalSentences: string[] = [];
+
+  for (let sentence of selectedSentences) {
+    totalLength += sentence.length;
+    if (totalLength < maxLength) {
+      finalSentences.push(sentence);
+    }
+  }
+  return finalSentences.map((sentence) => sentence.trim());
 };

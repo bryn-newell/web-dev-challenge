@@ -112,10 +112,22 @@ app.post("/post", async (c) => {
 
   readArticles.forEach(async (article) => {
     const { link, ptext, header, title } = article;
-    const text = `${title}\n${header}\n${ptext}`;
+    const text = `${title ?? ""}\n${header ?? ""}\n${ptext ?? ""}`.trim();
     console.log("Posting article text:", text);
     post(link, text);
   });
+
+  for (const article of readArticles) {
+    const { link, ptext, header, title } = article;
+    const text = `${title ?? ""}\n${header ?? ""}\n${ptext ?? ""}`.trim();
+    console.log("Posting article text:", text);
+
+    try {
+      await post(link, text);
+    } catch (error) {
+      console.error(`Failed to post article from ${link}:`, error);
+    }
+  }
 
   return c.json({
     success: true,
