@@ -1,5 +1,6 @@
 $eerie-black: #1A1B1D;
 $black-olive: #333d29;
+$black-olive-lighter: #3D4931;
 $reseda-green: #656D4A;
 $darkest-black: #010101;
 $black-02: #141414;
@@ -22,7 +23,12 @@ html {
   margin: 0;
 }
 
+h1 {
+  margin-block-start: 64px;
+}
+
 a {
+  color: $black-olive;
 
   &:visited,
   &:active {
@@ -40,7 +46,16 @@ button {
   padding-inline: 8px;
   border-radius: 4px;
   padding-block: 8px;
-  border-color: $black-olive;
+  border: 2px solid $black-olive;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $reseda-green;
+  }
+
+  &:active {
+    background-color: $black-olive-lighter;
+  }
 }
 
 #form {
@@ -54,12 +69,22 @@ button {
   }
 }
 
+label {
+  font-size: 20px;
+}
+
 input {
   height: 24px;
   border-radius: 4px;
-  box-shadow: 0;
+  box-shadow: none;
   width: 212px;
   margin-block-start: 12px;
+  border: 2px solid $reseda-green;
+
+  &:focus-visible {
+    // outline-offset: 1px;
+    // outline-color: $black-olive;
+  }
 }
 
 .button-container {
@@ -75,12 +100,13 @@ input {
 img {
   width: 100%;
   margin-block-start: 24px;
+  max-height: minmax(300px, 100vh);
+  height: 450px;
+  object-fit: cover;
+  // object-position: top;
+  // mask: linear-gradient(to top, rgb(0, 0, 0) 60%, rgba(0, 0, 0, 0));
+}
 
-  // mask-image: -webkit-gradient(linear, left top, right bottom,
-  //     color-stop(0.00, rgba(0, 0, 0, 1)),
-  //     color-stop(0.35, rgba(0, 0, 0, 1)),
-  //     color-stop(0.50, rgba(0, 0, 0, 0)),
-  //     color-stop(0.65, rgba(0, 0, 0, 0)),
-  //     color-stop(1.00, rgba(0, 0, 0, 0)));
-  // mask-image: linear-gradient(black 0%, transparent 100%);
+.read-section {
+  display: none;
 }
