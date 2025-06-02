@@ -22,6 +22,21 @@ form.addEventListener("submit", (e) => {
 
   // there should be an if statement here but oh well
   readSection.style.display = "block";
+  fetch("http://localhost:3000/links", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ links: arrOfLinks }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  input.value = "";
 });
 
 const readButton = document.querySelector("#read-button");
@@ -51,6 +66,20 @@ readButton.addEventListener("click", () => {
     }
     openAndCloseTab(link, left, top);
   });
+
+  fetch("http://localhost:3000/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 });
 
 const clearFormButton = document.querySelector("#clear-button");
@@ -60,6 +89,21 @@ clearFormButton.addEventListener("click", (e) => {
   arrOfLinks = [];
   input.value = "";
   readSection.style.display = "none";
+
+  fetch("http://localhost:3000/links", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ links: [] }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 });
 
 console.log(window.innerWidth);

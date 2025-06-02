@@ -8,8 +8,9 @@ export default async (link: string) => {
   await page.goto(link);
   const title = await page.title();
   console.log("Page title:", title);
-  const h1 = page.locator("h1").first();
-  const h1Text = await h1.textContent();
+  const h1s = page.locator("h1", {}).all();
+  const h1 = await h1s[0];
+  const h1Text = await h1?.textContent();
   console.log("H1 text:", h1Text);
   const ps = await page.locator("p").all();
   console.log("paragraphs:", ps);
@@ -20,6 +21,7 @@ export default async (link: string) => {
   await browser.close();
 
   return {
+    link,
     title,
     header: h1Text,
     ptext,
