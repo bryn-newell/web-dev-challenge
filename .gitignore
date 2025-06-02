@@ -10,3 +10,8 @@ node_modules
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# "database"
+SavedSession.json
+SavedState.json
+db.json
