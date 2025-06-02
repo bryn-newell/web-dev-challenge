@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently 'sass --watch styles:_site/css' 'npx @11ty/eleventy --serve'",
-    "dev-server": "tsx watch server/index.ts",
+    "start": "concurrently 'npm run start:frontend' 'npm run start:backend'",
+    "start:frontend": "concurrently 'sass --watch styles:_site/css' 'npx @11ty/eleventy --serve'",
+    "start:backend": "tsx watch server/index.ts",
     "build": "tsc"
   },
   "keywords": [],
