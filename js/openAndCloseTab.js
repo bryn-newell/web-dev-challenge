@@ -4,11 +4,11 @@ export const openAndCloseTab = (str, left, top) => {
   // to do - style the window to be smaller and move position based on the index
   const windProxy = open(
     str,
-    '_blank',
-    `popup=true, width=300, height=300, left=${left}, top=${top}`
+    "_blank",
+    `popup=true, width=300, height=300, left=${left}, top=${top}`,
   );
 
   setTimeout(() => {
-    // windProxy.close();
+    windProxy.close();
   }, 3000);
 };

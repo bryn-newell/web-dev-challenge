@@ -1,12 +1,17 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { cors } from "hono/cors";
+
 import fs from "fs/promises";
 import path from "path";
 
-import example from "./playwright/example";
+import read from "./playwright/read";
 import { createOauthClient, createAgent } from "./atproto";
+import { post } from "./post";
 
 const app = new Hono();
+
+app.use("*", cors({ origin: "*" }));
 
 app.post("/example", async (c) => {
   const body = await c.req.json();
@@ -14,7 +19,7 @@ app.post("/example", async (c) => {
   console.log("Received URL:", url);
   try {
     // Call the example function from playwright
-    const { ptext, header, title } = await example(url);
+    const { ptext, header, title } = await read(url);
 
     return c.json({
       title,
@@ -78,35 +83,43 @@ app.get("/oauth-callback", async (c) => {
 app.post("/links", async (c) => {
   const db = await fs.readFile(path.join(process.cwd(), "db.json"), "utf8");
 
-  const formData = await c.req.formData();
+  const { links } = await c.req.json();
 
-  const links = formData.get("links");
   console.log("Received links:", links);
+  const dbData = JSON.parse(db);
+  dbData.links = links;
+
+  await fs.writeFile(
+    path.join(process.cwd(), "db.json"),
+    JSON.stringify(dbData, null, 2),
+  );
+  console.log("Links saved to db.json");
+  return c.json({
+    success: true,
+    message: "Links saved successfully",
+  });
 });
 
 app.post("/post", async (c) => {
-  const { content } = await c.req.json();
-  console.log("Received content for post:", content);
+  const db = await fs.readFile(path.join(process.cwd(), "db.json"), "utf8");
+  const dbData = JSON.parse(db);
 
-  const sessionFile = await fs.readFile(
-    path.join(process.cwd(), "SavedSession.json"),
-    "utf8",
+  const { links } = dbData;
+
+  const readArticles = await Promise.all(
+    links.map(async (link) => await read(link)),
   );
 
-  const sessionStore = JSON.parse(sessionFile);
-  const did = Object.keys(sessionStore)[0];
-
-  const client = createOauthClient();
-  const session = await client.restore(did);
-  const agent = createAgent(session);
-
-  await agent.post({
-    text: content,
+  readArticles.forEach(async (article) => {
+    const { link, ptext, header, title } = article;
+    const text = `${title}\n${header}\n${ptext}`;
+    console.log("Posting article text:", text);
+    post(link, text);
   });
 
   return c.json({
     success: true,
-    message: "Post created successfully",
+    message: "Posts created successfully",
   });
 });
 

@@ -20,6 +20,7 @@ export default async (link: string) => {
   await browser.close();
 
   return {
+    link,
     title,
     header: h1Text,
     ptext,
